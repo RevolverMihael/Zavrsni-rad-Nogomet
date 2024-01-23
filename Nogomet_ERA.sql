@@ -62,11 +62,7 @@ insert into igraci (ime, prezime, pozicija)values
 ('Alvaro','Recoba','napadac');
 
 insert into momcadi (naziv_kluba, liga) values
-('Inter','Serie_A'),
-('Milan','Serie_A'),
-('Real_Madrid','La_Liga');
+('Inter','Serie_A');
 
 insert into treneri (ime, prezime, broj_postignuca) values
-('Roberto','Mancini',5),
-('Carlo','Ancelotti',25),
-('Fabio','Capello',7);
+('Roberto','Mancini',5);
