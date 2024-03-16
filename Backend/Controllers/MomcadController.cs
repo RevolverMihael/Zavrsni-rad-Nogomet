@@ -6,7 +6,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class IgracController : ControllerBase
+    public class MomcadController : ControllerBase
     {
         // Dependency injection
         // Definiraš privatno svojstvo
@@ -14,7 +14,7 @@ namespace Backend.Controllers
 
         // Dependency injection
         // U konstruktoru primir instancu i dodjeliš privatnom svojstvu
-        public IgracController(EdunovaContext context)
+        public MomcadController(EdunovaContext context)
         {
             _context = context;
         }
@@ -23,33 +23,32 @@ namespace Backend.Controllers
         [HttpGet]
         public IActionResult Get()
         {           
-                return new JsonResult(_context.Igraci.ToList());
+                return new JsonResult(_context.Momcadi.ToList());
             
         }
 
         [HttpPost]
-        public IActionResult Post(Igrac igrac)
+        public IActionResult Post(Momcad momcad)
         {
-            _context.Igraci.Add(igrac);
+            _context.Momcadi.Add(momcad);
             _context.SaveChanges();
-            return new JsonResult(igrac);
+            return new JsonResult(momcad);
         }
 
         [HttpPut]
         [Route("{sifra:int}")]
-        public IActionResult Put(int sifra, Igrac igrac)
+        public IActionResult Put(int sifra, Momcad momcad)
         {
-            var igracIzBaze = _context.Igraci.Find(sifra);
+            var momcadIzBaze = _context.Momcadi.Find(sifra);
             // za sada ručno, kasnije će doći Mapper
-            igracIzBaze.Ime = igrac.Ime;
-            igracIzBaze.Prezime= igrac.Prezime;
-            igracIzBaze.Pozicija= igrac.Pozicija;
-            igracIzBaze.BrojGolova=igrac.BrojGolova;
+            momcadIzBaze.Naziv_Kluba = momcad.Naziv_Kluba;
+            momcadIzBaze.Liga= momcad.Liga;
+            
 
-            _context.Igraci.Update(igracIzBaze);
+            _context.Momcadi.Update(momcadIzBaze);
             _context.SaveChanges();
 
-            return new JsonResult(igracIzBaze);
+            return new JsonResult(momcadIzBaze);
         }
 
         [HttpDelete]
@@ -57,8 +56,8 @@ namespace Backend.Controllers
         [Produces("application/json")]
         public IActionResult Delete(int sifra)
         {
-            var igracIzBaze = _context.Igraci.Find(sifra);
-            _context.Igraci.Remove(igracIzBaze);
+            var momcadIzBaze = _context.Momcadi.Find(sifra);
+            _context.Momcadi.Remove(momcadIzBaze);
             _context.SaveChanges();
             return new JsonResult(new { poruka="Obrisano"});
         }

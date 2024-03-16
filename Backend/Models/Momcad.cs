@@ -2,7 +2,7 @@
 {
     public class Momcad:Entitet
     {
-        public string? NazivKluba { get; set; }
+        public string? Naziv_Kluba { get; set; }
         public string? Liga { get; set; }
 
     }

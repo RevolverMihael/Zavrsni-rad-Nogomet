@@ -6,7 +6,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class IgracController : ControllerBase
+    public class TrenerController : ControllerBase
     {
         // Dependency injection
         // Definiraš privatno svojstvo
@@ -14,7 +14,7 @@ namespace Backend.Controllers
 
         // Dependency injection
         // U konstruktoru primir instancu i dodjeliš privatnom svojstvu
-        public IgracController(EdunovaContext context)
+        public TrenerController(EdunovaContext context)
         {
             _context = context;
         }
@@ -23,33 +23,34 @@ namespace Backend.Controllers
         [HttpGet]
         public IActionResult Get()
         {           
-                return new JsonResult(_context.Igraci.ToList());
+                return new JsonResult(_context.Treneri.ToList());
             
         }
 
         [HttpPost]
-        public IActionResult Post(Igrac igrac)
+        public IActionResult Post(Trener trener)
         {
-            _context.Igraci.Add(igrac);
+            _context.Treneri.Add(trener);
             _context.SaveChanges();
-            return new JsonResult(igrac);
+            return new JsonResult(trener);
         }
 
         [HttpPut]
         [Route("{sifra:int}")]
-        public IActionResult Put(int sifra, Igrac igrac)
+        public IActionResult Put(int sifra, Trener trener)
         {
-            var igracIzBaze = _context.Igraci.Find(sifra);
+            var trenerIzBaze = _context.Treneri.Find(sifra);
             // za sada ručno, kasnije će doći Mapper
-            igracIzBaze.Ime = igrac.Ime;
-            igracIzBaze.Prezime= igrac.Prezime;
-            igracIzBaze.Pozicija= igrac.Pozicija;
-            igracIzBaze.BrojGolova=igrac.BrojGolova;
+            trenerIzBaze.Ime = trener.Ime;
+            trenerIzBaze.Prezime= trener.Prezime;
+            trenerIzBaze.Datum_Rodenja = trener.Datum_Rodenja;
+            trenerIzBaze.Broj_Postignuca = trener.Broj_Postignuca;
+            
 
-            _context.Igraci.Update(igracIzBaze);
+            _context.Treneri.Update(trenerIzBaze);
             _context.SaveChanges();
 
-            return new JsonResult(igracIzBaze);
+            return new JsonResult(trenerIzBaze);
         }
 
         [HttpDelete]
@@ -57,8 +58,8 @@ namespace Backend.Controllers
         [Produces("application/json")]
         public IActionResult Delete(int sifra)
         {
-            var igracIzBaze = _context.Igraci.Find(sifra);
-            _context.Igraci.Remove(igracIzBaze);
+            var trenerIzBaze = _context.Treneri.Find(sifra);
+            _context.Treneri.Remove(trenerIzBaze);
             _context.SaveChanges();
             return new JsonResult(new { poruka="Obrisano"});
         }
