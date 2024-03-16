@@ -6,7 +6,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class IgracController
+    public class IgracController : ControllerBase
     {
         // Dependency injection
         // Definiraš privatno svojstvo
@@ -22,8 +22,9 @@ namespace Backend.Controllers
 
         [HttpGet]
         public IActionResult Get()
-        {
-            return new JsonResult(_context.Igraci.ToList());
+        {           
+                return new JsonResult(_context.Igraci.ToList());
+            
         }
 
         [HttpPost]
