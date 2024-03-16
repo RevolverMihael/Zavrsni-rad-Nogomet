@@ -6,7 +6,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class IgracController : ControllerBase
+    public class OsobaController : ControllerBase
     {
         // Dependency injection
         // Definiraš privatno svojstvo
@@ -14,7 +14,7 @@ namespace Backend.Controllers
 
         // Dependency injection
         // U konstruktoru primir instancu i dodjeliš privatnom svojstvu
-        public IgracController(EdunovaContext context)
+        public OsobaController(EdunovaContext context)
         {
             _context = context;
         }
@@ -23,33 +23,33 @@ namespace Backend.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return new JsonResult(_context.Igraci.ToList());
+            return new JsonResult(_context.Osobe.ToList());
 
         }
 
         [HttpPost]
-        public IActionResult Post(Igrac igrac)
+        public IActionResult Post(Osoba osoba)
         {
-            _context.Igraci.Add(igrac);
+            _context.Osobe.Add(osoba);
             _context.SaveChanges();
-            return new JsonResult(igrac);
+            return new JsonResult(osoba);
         }
 
         [HttpPut]
         [Route("{sifra:int}")]
-        public IActionResult Put(int sifra, Igrac igrac)
+        public IActionResult Put(int sifra, Osoba osoba)
         {
-            var igracIzBaze = _context.Igraci.Find(sifra);
+            var osobaIzBaze = _context.Osobe.Find(sifra);
             // za sada ručno, kasnije će doći Mapper
-            igracIzBaze.Ime = igrac.Ime;
-            igracIzBaze.Prezime = igrac.Prezime;
-            igracIzBaze.Pozicija = igrac.Pozicija;
-            igracIzBaze.BrojGolova = igrac.BrojGolova;
+            osobaIzBaze.Ime = osoba.Ime;
+            osobaIzBaze.Prezime = osoba.Prezime;
+            osobaIzBaze.Email = osoba.Email;
+            osobaIzBaze.Oib = osoba.Oib;
 
-            _context.Igraci.Update(igracIzBaze);
+            _context.Osobe.Update(osobaIzBaze);
             _context.SaveChanges();
 
-            return new JsonResult(igracIzBaze);
+            return new JsonResult(osobaIzBaze);
         }
 
         [HttpDelete]
@@ -57,8 +57,8 @@ namespace Backend.Controllers
         [Produces("application/json")]
         public IActionResult Delete(int sifra)
         {
-            var igracIzBaze = _context.Igraci.Find(sifra);
-            _context.Igraci.Remove(igracIzBaze);
+            var osobaIzBaze = _context.Osobe.Find(sifra);
+            _context.Osobe.Remove(osobaIzBaze);
             _context.SaveChanges();
             return new JsonResult(new { poruka = "Obrisano" });
         }

@@ -13,6 +13,7 @@ namespace Backend.Data
         public DbSet<Igrac> Igraci { get; set; }
         public DbSet<Momcad> Momcadi { get; set; }
         public DbSet<Trener> Treneri { get; set; }
+        public DbSet<Osoba> Osobe { get; set; }
 
 
     }

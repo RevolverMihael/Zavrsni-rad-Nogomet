@@ -2,12 +2,11 @@
 
 namespace Backend.Models
 {
-    public class Igrac : Entitet
+    public class Osoba : Entitet
     {
         public string? Ime { get; set; }
         public string? Prezime { get; set; }
-        public string? Pozicija { get; set; }
-        [Column("broj_golova")]
-        public int? BrojGolova { get; set; }
+        public string? Email { get; set; }       
+        public string? Oib { get; set; }
     }
 }
