@@ -35,6 +35,15 @@ namespace Backend.Controllers
             return new JsonResult(trener);
         }
 
+        [HttpGet]
+        [Route("{sifra:int}")]
+        public IActionResult GetBySifra(int sifra)
+        {
+            return new JsonResult(_context.Treneri.Find(sifra));
+        }
+
+
+
         [HttpPut]
         [Route("{sifra:int}")]
         public IActionResult Put(int sifra, Trener trener)

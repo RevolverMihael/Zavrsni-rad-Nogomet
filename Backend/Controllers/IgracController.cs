@@ -35,6 +35,13 @@ namespace Backend.Controllers
             return new JsonResult(igrac);
         }
 
+        [HttpGet]
+        [Route("{sifra:int}")]
+        public IActionResult GetBySifra(int sifra) 
+        {
+            return new JsonResult(_context.Igraci.Find(sifra));
+        }
+
         [HttpPut]
         [Route("{sifra:int}")]
         public IActionResult Put(int sifra, Igrac igrac)

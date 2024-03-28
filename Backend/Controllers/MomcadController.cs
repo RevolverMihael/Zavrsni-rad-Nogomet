@@ -35,6 +35,14 @@ namespace Backend.Controllers
             return new JsonResult(momcad);
         }
 
+        [HttpGet]
+        [Route("{sifra:int}")]
+        public IActionResult GetBySifra(int sifra)
+        {
+            return new JsonResult(_context.Momcadi.Find(sifra));
+        }
+
+
         [HttpPut]
         [Route("{sifra:int}")]
         public IActionResult Put(int sifra, Momcad momcad)
